@@ -7,7 +7,7 @@ const BrandLogo = () => {
       <BookMarkedIcon className="size-6" />
       <span className="text-2xl font-bold">
         <span className="text-primary">edu</span>
-        <span className="text-muted-foreground">kurve...</span>
+        <span className="text-muted-foreground">kurve.</span>
       </span>
     </div>
   );
