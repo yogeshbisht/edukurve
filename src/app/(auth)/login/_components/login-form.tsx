@@ -5,20 +5,42 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2 } from "lucide-react";
-import { useTransition } from "react";
+import { Loader2, SendIcon } from "lucide-react";
+import { useTransition, useState } from "react";
 import { toast } from "sonner";
 import AuthWrapper from "@/components/auth/auth-wrapper";
 import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+  const router = useRouter();
   const [githubPending, startGithubTransition] = useTransition();
+  const [emailPending, startEmailTransition] = useTransition();
+  const [email, setEmail] = useState("");
 
   async function signInWithGithub() {
     startGithubTransition(async () => {
       await authClient.signIn.social({
         provider: "github",
         fetchOptions: {
+          onError: (error) => {
+            toast.error(error.error.statusText);
+          },
+        },
+      });
+    });
+  }
+
+  async function signInWithEmail() {
+    startEmailTransition(async () => {
+      await authClient.emailOtp.sendVerificationOtp({
+        email,
+        type: "sign-in",
+        fetchOptions: {
+          onSuccess: () => {
+            toast.success("OTP sent to your email");
+            router.push(`/verify-email?email=${email}&type=sign-in`);
+          },
           onError: (error) => {
             toast.error(error.error.statusText);
           },
@@ -61,9 +83,30 @@ const LoginForm = () => {
       <div className="grid gap-3">
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
-          <Input type="email" placeholder="m@example.com" />
+          <Input
+            type="email"
+            placeholder="m@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
-        <Button className="w-full">Continue with Email</Button>
+        <Button
+          className="w-full"
+          onClick={signInWithEmail}
+          disabled={emailPending}
+        >
+          {emailPending ? (
+            <>
+              <Loader2 className="animate-spin size-4" />
+              <span className="ml-2">Sending OTP...</span>
+            </>
+          ) : (
+            <>
+              <SendIcon className="size-4" />
+              Continue with Email
+            </>
+          )}
+        </Button>
         <Link
           href="/forgot-password"
           className="text-sm text-muted-foreground text-right"

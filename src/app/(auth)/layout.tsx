@@ -6,7 +6,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="relative flex min-h-svh flex-col items-center justify-center gap-6">
       <BrandLogo />
-      <div className="flex w-full max-w-sm flex-col gap-6">{children}</div>
+      <div className="flex w-full flex-col max-w-lg gap-6">{children}</div>
       <div className="text-sm text-muted-foreground text-center">
         By continuing, you agree to our <br />
         <Link href="/terms" className="text-primary">

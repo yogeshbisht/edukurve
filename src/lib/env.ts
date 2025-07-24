@@ -8,13 +8,9 @@ export const env = createEnv({
     BETTER_AUTH_URL: z.url(),
     GITHUB_CLIENT_ID: z.string(),
     GITHUB_CLIENT_SECRET: z.string(),
+    RESEND_API_KEY: z.string(),
+    RESEND_FROM_EMAIL: z.string(),
   },
 
-  client: {
-    NEXT_PUBLIC_FRONTEND_URL: z.url(),
-  },
-
-  experimental__runtimeEnv: {
-    NEXT_PUBLIC_FRONTEND_URL: process.env.NEXT_PUBLIC_FRONTEND_URL,
-  },
+  experimental__runtimeEnv: {},
 });

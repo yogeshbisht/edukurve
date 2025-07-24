@@ -20,7 +20,7 @@ const AuthWrapper = ({ type, children }: AuthWrapperProps) => {
   const { title, description, footer } = AUTH_FORM_PARAMS[type];
 
   return (
-    <Card>
+    <Card className="w-full max-w-sm mx-auto">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
