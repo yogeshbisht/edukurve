@@ -20,11 +20,7 @@ const Navbar = () => {
             {session ? (
               <>
                 <ThemeToggle />
-                <UserButton
-                  name={session.user.name}
-                  email={session.user.email}
-                  image={session.user.image ?? ""}
-                />
+                <UserButton user={session.user} />
               </>
             ) : (
               <>
