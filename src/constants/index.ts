@@ -13,7 +13,7 @@ const MENU_ITEMS = [
   },
   {
     label: "Dashboard",
-    href: "/dashboard",
+    href: "/admin",
     icon: LayoutDashboardIcon,
   },
 ];

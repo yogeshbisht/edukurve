@@ -28,18 +28,9 @@ export function NavUser() {
           asChild
           className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
         >
-          <Link href="/login">
+          <Link href="/login" className="h-12">
             <IconLogin />
             <span>Login</span>
-          </Link>
-        </SidebarMenuButton>
-        <SidebarMenuButton
-          asChild
-          className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
-        >
-          <Link href="/signup">
-            <IconUserPlus />
-            <span>Sign up</span>
           </Link>
         </SidebarMenuButton>
       </SidebarMenuItem>
