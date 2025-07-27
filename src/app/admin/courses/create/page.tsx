@@ -39,6 +39,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import TextEditor from "@/components/rick-text-editor/text-editor";
 
 const CoursesCreationPage = () => {
   const form = useForm<CourseSchemaType>({
@@ -156,11 +157,7 @@ const CoursesCreationPage = () => {
                   <FormItem>
                     <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <Textarea
-                        {...field}
-                        placeholder="Enter the full description for the course"
-                        className="h-[200px]"
-                      />
+                      <TextEditor field={field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
