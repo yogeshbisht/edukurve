@@ -15,7 +15,7 @@ import {
   courseSchema,
   courseStatus,
 } from "@/lib/validations";
-import { ArrowLeftIcon, PlusIcon, SparkleIcon } from "lucide-react";
+import { ArrowLeftIcon, PlusCircleIcon, SparkleIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -40,6 +40,7 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import TextEditor from "@/components/rick-text-editor/text-editor";
+import FileUploader from "@/components/file-uploader/uploader";
 
 const CoursesCreationPage = () => {
   const form = useForm<CourseSchemaType>({
@@ -171,7 +172,7 @@ const CoursesCreationPage = () => {
                   <FormItem>
                     <FormLabel>Thumbnail Image</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Thumbnail url" disabled />
+                      <FileUploader />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -304,7 +305,7 @@ const CoursesCreationPage = () => {
               <div className="flex justify-end">
                 <Button type="submit" className="w-full max-w-md" size="lg">
                   Create Course
-                  <PlusIcon className="size-4 ml-2" />
+                  <PlusCircleIcon className="size-4" />
                 </Button>
               </div>
             </form>
