@@ -172,7 +172,10 @@ const CoursesCreationPage = () => {
                   <FormItem>
                     <FormLabel>Thumbnail Image</FormLabel>
                     <FormControl>
-                      <FileUploader />
+                      <FileUploader
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

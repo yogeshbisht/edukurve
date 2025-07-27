@@ -11,7 +11,18 @@ export const env = createEnv({
     RESEND_API_KEY: z.string(),
     RESEND_FROM_EMAIL: z.string(),
     ARCJET_API_KEY: z.string(),
+    AWS_ACCESS_KEY_ID: z.string(),
+    AWS_SECRET_ACCESS_KEY: z.string(),
+    AWS_ENDPOINT_URL_S3: z.string(),
+    AWS_ENDPOINT_URL_IAM: z.string(),
+    AWS_REGION: z.string(),
   },
 
-  experimental__runtimeEnv: {},
+  client: {
+    NEXT_PUBLIC_AWS_BUCKET_NAME_S3: z.string(),
+  },
+
+  experimental__runtimeEnv: {
+    NEXT_PUBLIC_AWS_BUCKET_NAME_S3: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME_S3,
+  },
 });
