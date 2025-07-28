@@ -23,34 +23,34 @@ export const courseCategories = [
 export const courseSchema = z.object({
   title: z
     .string()
-    .min(3, { message: "Title must be at least 3 characters" })
-    .max(100, { message: "Title must be less than 100 characters" }),
+    .min(3, { error: "Title must be at least 3 characters" })
+    .max(100, { error: "Title must be less than 100 characters" }),
   description: z
     .string()
-    .min(3, { message: "Description must be at least 3 characters" })
-    .max(1000, { message: "Description must be less than 1000 characters" }),
-  fileKey: z.string().min(1, { message: "File key is required" }),
-  price: z.number().min(1, { message: "Price must be a positive number" }),
-  duration: z
+    .min(3, { error: "Description must be at least 3 characters" })
+    .max(1000, { error: "Description must be less than 1000 characters" }),
+  fileKey: z.string().min(1, { error: "File key is required" }),
+  price: z.coerce.number().min(1, { error: "Price must be a positive number" }),
+  duration: z.coerce
     .number()
-    .min(1, { message: "Duration must be at least 1 hour" })
-    .max(500, { message: "Duration must be less than 500 hours" }),
-  level: z.enum(courseLevels, { message: "Invalid level" }),
-  category: z.enum(courseCategories, { message: "Invalid category" }),
+    .min(1, { error: "Duration must be at least 1 hour" })
+    .max(500, { error: "Duration must be less than 500 hours" }),
+  level: z.enum(courseLevels, { error: "Invalid level" }),
+  category: z.enum(courseCategories, { error: "Invalid category" }),
   smallDescription: z
     .string()
-    .min(3, { message: "Small description must be at least 3 characters" })
+    .min(3, { error: "Small description must be at least 3 characters" })
     .max(200, {
-      message: "Small description must be less than 200 characters",
+      error: "Small description must be less than 200 characters",
     }),
   slug: z
     .string()
-    .min(3, { message: "Slug must be at least 3 characters" })
-    .max(100, { message: "Slug must be less than 100 characters" })
+    .min(3, { error: "Slug must be at least 3 characters" })
+    .max(100, { error: "Slug must be less than 100 characters" })
     .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
-      message: "Slug must be in kebab-case",
+      error: "Slug must be in kebab-case",
     }),
-  status: z.enum(courseStatus, { message: "Invalid status" }),
+  status: z.enum(courseStatus, { error: "Invalid status" }),
 });
 
 export type CourseSchemaType = z.infer<typeof courseSchema>;

@@ -15,9 +15,14 @@ import {
   courseSchema,
   courseStatus,
 } from "@/lib/validations";
-import { ArrowLeftIcon, PlusCircleIcon, SparkleIcon } from "lucide-react";
+import {
+  ArrowLeftIcon,
+  Loader2Icon,
+  PlusCircleIcon,
+  SparkleIcon,
+} from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -41,9 +46,18 @@ import {
 import { Separator } from "@/components/ui/separator";
 import TextEditor from "@/components/rick-text-editor/text-editor";
 import FileUploader from "@/components/file-uploader/uploader";
+import { tryCatch } from "@/hooks/try-catch";
+import { createCourse } from "./actions";
+import { toast } from "sonner";
+import { ApiResponse } from "@/lib/types";
+import { Course } from "@/generated/prisma";
+import { useRouter } from "next/navigation";
 
 const CoursesCreationPage = () => {
-  const form = useForm<CourseSchemaType>({
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+
+  const form = useForm({
     resolver: zodResolver(courseSchema),
     defaultValues: {
       title: "",
@@ -59,8 +73,23 @@ const CoursesCreationPage = () => {
     },
   });
 
-  const onSubmit = (data: CourseSchemaType) => {
-    console.log(data);
+  const onSubmit = (values: CourseSchemaType) => {
+    startTransition(async () => {
+      const { data: result, error } = await tryCatch<ApiResponse<Course>>(
+        createCourse(values)
+      );
+
+      if (error) {
+        toast.error("An unexpected error occurred. Please try again.");
+        return;
+      }
+
+      if (result.status === "success") {
+        toast.success(result.message);
+        form.reset();
+        router.push(`/admin/courses`);
+      }
+    });
   };
 
   return (
@@ -248,6 +277,7 @@ const CoursesCreationPage = () => {
                       <FormControl>
                         <Input
                           {...field}
+                          value={field.value as number}
                           type="number"
                           placeholder="Enter the duration in hours"
                         />
@@ -265,6 +295,7 @@ const CoursesCreationPage = () => {
                       <FormControl>
                         <Input
                           {...field}
+                          value={field.value as number}
                           type="number"
                           placeholder="Enter the price in USD"
                         />
@@ -306,9 +337,23 @@ const CoursesCreationPage = () => {
 
               <Separator />
               <div className="flex justify-end">
-                <Button type="submit" className="w-full max-w-md" size="lg">
-                  Create Course
-                  <PlusCircleIcon className="size-4" />
+                <Button
+                  type="submit"
+                  className="w-full max-w-md"
+                  size="lg"
+                  disabled={isPending}
+                >
+                  {isPending ? (
+                    <>
+                      <Loader2Icon className="size-4 animate-spin" />
+                      Creating...
+                    </>
+                  ) : (
+                    <>
+                      Create Course
+                      <PlusCircleIcon className="size-4" />
+                    </>
+                  )}
                 </Button>
               </div>
             </form>
