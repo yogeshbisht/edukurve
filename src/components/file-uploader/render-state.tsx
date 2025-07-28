@@ -58,12 +58,10 @@ export const RenderErrorState = () => {
         <ImageIcon className="size-6 text-destructive/80" />
       </div>
       <h3 className="mt-2 text-sm font-semibold text-destructive">
-        File type not supported
+        Upload failed
       </h3>
-      <p className="text-xs text-muted-foreground">
-        Please upload a PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX file
-      </p>
-      <Button variant="outline" size="sm" className="mt-4">
+      <p className="text-xs text-muted-foreground">Something went wrong</p>
+      <Button type="button" variant="outline" size="sm" className="mt-4">
         <UploadIcon className="size-4 mr-2" />
         Try again
       </Button>

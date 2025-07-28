@@ -71,7 +71,9 @@ const Uploader = ({ value, onChange }: UploaderProps) => {
           uploading: false,
           progress: 0,
           error: true,
+          objectUrl: undefined,
         }));
+
         return;
       }
 
@@ -126,6 +128,7 @@ const Uploader = ({ value, onChange }: UploaderProps) => {
         uploading: false,
         progress: 0,
         error: true,
+        objectUrl: undefined,
       }));
     }
   };
@@ -233,7 +236,7 @@ const Uploader = ({ value, onChange }: UploaderProps) => {
       );
 
       if (fileSizeTooLarge) {
-        toast.error("File size must be less than 5MB");
+        toast.error("File size must be less than 1MB");
       }
     }
   };
@@ -279,7 +282,7 @@ const Uploader = ({ value, onChange }: UploaderProps) => {
     accept: { "image/*": [] },
     maxFiles: 1,
     multiple: false,
-    maxSize: 1024 * 1024 * 5, // 5MB
+    maxSize: 1024 * 1024 * 1, // 1MB
     onDropRejected,
     disabled: fileState.uploading || !!fileState.objectUrl,
   });

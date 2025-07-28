@@ -6,23 +6,50 @@ import z from "zod";
 import { Course, CourseLevel, CourseStatus } from "@/generated/prisma";
 import { revalidatePath } from "next/cache";
 import { ApiResponse } from "@/lib/types";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import { requireAdmin } from "@/data/admin/require-admin";
+import arcjet, { detectBot, fixedWindow } from "@/lib/arcjet";
+import { request } from "@arcjet/next";
+
+const aj = arcjet
+  .withRule(
+    detectBot({
+      mode: "LIVE",
+      allow: [],
+    })
+  )
+  .withRule(
+    fixedWindow({
+      mode: "LIVE",
+      window: "1m",
+      max: 2,
+    })
+  );
 
 export async function createCourse(
   formData: CourseSchemaType
 ): Promise<ApiResponse<Course>> {
+  const session = await requireAdmin();
+
   try {
-    const session = await auth.api.getSession({
-      headers: await headers(),
+    const req = await request();
+    const decision = await aj.protect(req, {
+      fingerprint: session.user.id,
     });
 
-    if (!session?.user) {
+    if (decision.isDenied()) {
+      if (decision.reason.isRateLimit()) {
+        return {
+          status: "error",
+          message: "Too many requests",
+        };
+      }
       return {
         status: "error",
-        message: "You must be logged in to create a course",
+        message:
+          "You seems like a bot. If this is mistake, please contact the support.",
       };
     }
+
     const validatedFields = courseSchema.safeParse(formData);
 
     if (!validatedFields.success) {
