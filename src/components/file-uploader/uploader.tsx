@@ -14,6 +14,7 @@ import { toast } from "sonner";
 import { FileRejection } from "react-dropzone";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { useConstructUrl } from "@/hooks/use-construct";
 
 interface UploaderState {
   id: string | null;
@@ -32,6 +33,7 @@ interface UploaderProps {
 }
 
 const Uploader = ({ value, onChange }: UploaderProps) => {
+  const fileUrl = useConstructUrl(value || "");
   const [fileState, setFileState] = useState<UploaderState>({
     id: null,
     file: null,
@@ -41,6 +43,7 @@ const Uploader = ({ value, onChange }: UploaderProps) => {
     error: false,
     fileType: "image",
     key: value,
+    objectUrl: fileUrl,
   });
 
   const handleFileUpload = async (file: File) => {
