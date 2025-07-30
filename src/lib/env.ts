@@ -20,9 +20,11 @@ export const env = createEnv({
 
   client: {
     NEXT_PUBLIC_AWS_BUCKET_NAME_S3: z.string(),
+    NEXT_PUBLIC_S3_MEDIA_URL: z.string(),
   },
 
   experimental__runtimeEnv: {
     NEXT_PUBLIC_AWS_BUCKET_NAME_S3: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME_S3,
+    NEXT_PUBLIC_S3_MEDIA_URL: process.env.NEXT_PUBLIC_S3_MEDIA_URL,
   },
 });
