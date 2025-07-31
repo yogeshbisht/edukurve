@@ -46,7 +46,7 @@ export async function createCourse(
       return {
         status: "error",
         message:
-          "You seems like a bot. If this is mistake, please contact the support.",
+          "You seem like a bot. If this is a mistake, please contact the support.",
       };
     }
 
