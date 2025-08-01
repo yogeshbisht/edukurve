@@ -125,7 +125,8 @@ const EditCourseForm = ({ course }: EditCourseFormProps) => {
               form.setValue("slug", slug, { shouldValidate: true });
             }}
           >
-            Generate Slug <SparkleIcon className="size-4 ml-2" />
+            <SparkleIcon className="size-4" />
+            Generate Slug
           </Button>
         </div>
 

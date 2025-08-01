@@ -84,3 +84,78 @@ export const updateCourse = async (
     };
   }
 };
+
+export const reorderLessons = async (
+  chapterId: string,
+  lessons: { id: string; position: number }[],
+  courseId: string
+): Promise<ApiResponse<Course>> => {
+  await requireAdmin();
+
+  try {
+    if (!lessons?.length) {
+      return {
+        status: "error",
+        message: "No lessons to reorder",
+      };
+    }
+
+    const updates = lessons.map((lesson) =>
+      prisma.lesson.update({
+        where: { id: lesson.id, chapterId },
+        data: { position: lesson.position },
+      })
+    );
+
+    await prisma.$transaction(updates);
+
+    revalidatePath(`/admin/courses/${courseId}/edit`);
+
+    return {
+      status: "success",
+      message: "Lessons reordered successfully",
+    };
+  } catch (error) {
+    return {
+      status: "error",
+      message: "Failed to reorder lessons",
+    };
+  }
+};
+
+export const reorderChapters = async (
+  chapters: { id: string; position: number }[],
+  courseId: string
+): Promise<ApiResponse<Course>> => {
+  await requireAdmin();
+
+  try {
+    if (!chapters?.length) {
+      return {
+        status: "error",
+        message: "No chapters to reorder",
+      };
+    }
+
+    const updates = chapters.map((chapter) =>
+      prisma.chapter.update({
+        where: { id: chapter.id, courseId },
+        data: { position: chapter.position },
+      })
+    );
+
+    await prisma.$transaction(updates);
+
+    revalidatePath(`/admin/courses/${courseId}/edit`);
+
+    return {
+      status: "success",
+      message: "Chapters reordered successfully",
+    };
+  } catch (error) {
+    return {
+      status: "error",
+      message: "Failed to reorder chapters",
+    };
+  }
+};
