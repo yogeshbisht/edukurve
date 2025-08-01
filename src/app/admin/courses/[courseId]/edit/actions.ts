@@ -1,10 +1,15 @@
 "use server";
 
-import { courseSchema, CourseSchemaType } from "@/lib/validations";
+import {
+  ChapterSchemaType,
+  chapterSchema,
+  courseSchema,
+  CourseSchemaType,
+} from "@/lib/validations";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/data/admin/require-admin";
 import { ApiResponse } from "@/lib/types";
-import { Course, CourseLevel, CourseStatus } from "@/generated/prisma";
+import { Chapter, Course, CourseLevel, CourseStatus } from "@/generated/prisma";
 import { revalidatePath } from "next/cache";
 import arcjet, { detectBot, fixedWindow } from "@/lib/arcjet";
 import { request } from "@arcjet/next";
@@ -156,6 +161,51 @@ export const reorderChapters = async (
     return {
       status: "error",
       message: "Failed to reorder chapters",
+    };
+  }
+};
+
+export const createChapter = async (
+  values: ChapterSchemaType
+): Promise<ApiResponse<Chapter>> => {
+  await requireAdmin();
+
+  try {
+    const result = chapterSchema.safeParse(values);
+
+    if (!result.success) {
+      return {
+        status: "error",
+        message: "Invalid form data",
+      };
+    }
+
+    await prisma.$transaction(async (tx) => {
+      const maxPosition = await tx.chapter.findFirst({
+        where: { courseId: result.data.courseId },
+        select: { position: true },
+        orderBy: { position: "desc" },
+      });
+
+      await tx.chapter.create({
+        data: {
+          title: result.data.name,
+          courseId: result.data.courseId,
+          position: (maxPosition?.position ?? 0) + 1,
+        },
+      });
+
+      revalidatePath(`/admin/courses/${result.data.courseId}/edit`);
+    });
+
+    return {
+      status: "success",
+      message: "Chapter created successfully",
+    };
+  } catch (error) {
+    return {
+      status: "error",
+      message: "Failed to create chapter",
     };
   }
 };
