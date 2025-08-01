@@ -40,6 +40,7 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { reorderChapters, reorderLessons } from "../actions";
 import NewChapterModal from "./new-chapter-modal";
+import NewLessonModal from "./new-lesson-modal";
 
 interface CourseStructureProps {
   course: AdminCourseSingularType;
@@ -400,9 +401,10 @@ const CourseStructure = ({ course }: CourseStructureProps) => {
                               ))}
                             </SortableContext>
                             <div className="p-2">
-                              <Button variant="outline" className="w-full">
-                                Create New Lesson
-                              </Button>
+                              <NewLessonModal
+                                courseId={course.id}
+                                chapterId={item.id}
+                              />
                             </div>
                           </div>
                         </CollapsibleContent>
