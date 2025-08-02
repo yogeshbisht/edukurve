@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { PlusIcon } from "lucide-react";
+import { Loader2Icon, PlusIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { lessonSchema, LessonSchemaType } from "@/lib/validations";
@@ -121,7 +121,14 @@ const NewLessonModal = ({ courseId, chapterId }: NewLessonModalProps) => {
 
             <DialogFooter className="flex justify-end gap-2">
               <Button type="submit" disabled={isPending} className="w-full">
-                {isPending ? "Creating..." : "Create Lesson"}
+                {isPending ? (
+                  <>
+                    <Loader2Icon className="size-4 animate-spin" />
+                    Creating...
+                  </>
+                ) : (
+                  "Create Lesson"
+                )}
               </Button>
             </DialogFooter>
           </form>

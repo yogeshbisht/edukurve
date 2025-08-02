@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { PlusIcon } from "lucide-react";
+import { Loader2Icon, PlusIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { chapterSchema, ChapterSchemaType } from "@/lib/validations";
@@ -96,7 +96,14 @@ const NewChapterModal = ({ courseId }: NewChapterModalProps) => {
 
             <DialogFooter className="flex justify-end gap-2">
               <Button type="submit" disabled={isPending} className="w-full">
-                {isPending ? "Creating..." : "Create Chapter"}
+                {isPending ? (
+                  <>
+                    <Loader2Icon className="size-4 animate-spin" />
+                    Creating...
+                  </>
+                ) : (
+                  "Create Chapter"
+                )}
               </Button>
             </DialogFooter>
           </form>
