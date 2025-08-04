@@ -53,6 +53,8 @@ import { ApiResponse } from "@/lib/types";
 import { Course } from "@/generated/prisma";
 import { useRouter } from "next/navigation";
 
+// TODO: USE CONFETTI FOR SUCCESS MESSAGE
+
 const CoursesCreationPage = () => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();

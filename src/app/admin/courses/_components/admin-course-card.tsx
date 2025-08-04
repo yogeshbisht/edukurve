@@ -7,9 +7,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton";
 import { AdminGetCoursesType } from "@/data/admin/admin-get-courses";
 import { useConstructUrl } from "@/hooks/use-construct";
-import { IconEdit, IconTrash } from "@tabler/icons-react";
 import {
   ArrowRightIcon,
   EyeIcon,
@@ -103,6 +103,22 @@ const AdminCourseCard = ({ course }: AdminCourseCardProps) => {
           Edit Course
           <ArrowRightIcon className="size-4" />
         </Link>
+      </CardContent>
+    </Card>
+  );
+};
+
+// TODO: Improve this skeleton later
+export const AdminCourseCardSkeleton = () => {
+  return (
+    <Card className="group relative py-0 gap-0">
+      <Skeleton className="w-full h-48 rounded-t-lg aspect-video object-cover" />
+      <CardContent className="p-6">
+        <Skeleton className="w-full h-4" />
+        <Skeleton className="w-full h-4 mt-2" />
+        <Skeleton className="w-full h-4 mt-2" />
+        <Skeleton className="w-full h-4 mt-2" />
+        <Skeleton className="w-full h-4 mt-2" />
       </CardContent>
     </Card>
   );
