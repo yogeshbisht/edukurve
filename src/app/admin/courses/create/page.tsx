@@ -205,6 +205,7 @@ const CoursesCreationPage = () => {
                       <FileUploader
                         value={field.value}
                         onChange={field.onChange}
+                        fileTypeAccepted="image"
                       />
                     </FormControl>
                     <FormMessage />

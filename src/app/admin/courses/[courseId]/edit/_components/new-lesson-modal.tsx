@@ -25,7 +25,6 @@ import { Input } from "@/components/ui/input";
 import { createLesson } from "../actions";
 import { toast } from "sonner";
 import { tryCatch } from "@/hooks/try-catch";
-import { Textarea } from "@/components/ui/textarea";
 
 interface NewLessonModalProps {
   courseId: string;
@@ -41,7 +40,7 @@ const NewLessonModal = ({ courseId, chapterId }: NewLessonModalProps) => {
     defaultValues: {
       courseId,
       chapterId,
-      name: "",
+      title: "",
       description: "",
       thumbnailKey: "",
       videoKey: "",
@@ -89,30 +88,12 @@ const NewLessonModal = ({ courseId, chapterId }: NewLessonModalProps) => {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
               control={form.control}
-              name="name"
+              name="title"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Lesson Name*</FormLabel>
                   <FormControl>
                     <Input {...field} placeholder="Lesson Name" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Lesson Description</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      {...field}
-                      placeholder="Lesson Description"
-                      className="min-h-20 resize-none"
-                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

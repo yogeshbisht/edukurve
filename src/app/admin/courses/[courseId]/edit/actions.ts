@@ -242,7 +242,7 @@ export const createLesson = async (
 
       await tx.lesson.create({
         data: {
-          title: result.data.name,
+          title: result.data.title,
           chapterId: result.data.chapterId,
           position: (maxPosition?.position ?? 0) + 1,
           description: result.data.description,
