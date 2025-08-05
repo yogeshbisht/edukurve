@@ -1,4 +1,4 @@
-import { getAllCourses } from "@/data/get-all-courses";
+import { getAllCourses } from "@/data/course/get-all-courses";
 import PublicCourseCard, {
   PublicCourseCardSkeleton,
 } from "../_components/public-course-card";

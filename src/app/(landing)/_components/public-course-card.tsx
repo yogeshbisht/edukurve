@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent } from "@/components/ui/card";
-import { GetAllCoursesType } from "@/data/get-all-courses";
+import { GetAllCoursesType } from "@/data/course/get-all-courses";
 import { useConstructUrl } from "@/hooks/use-construct";
 import Image from "next/image";
 import Link from "next/link";
