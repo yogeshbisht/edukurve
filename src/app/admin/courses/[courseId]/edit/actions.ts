@@ -19,23 +19,16 @@ import {
   Lesson,
 } from "@/generated/prisma";
 import { revalidatePath } from "next/cache";
-import arcjet, { detectBot, fixedWindow } from "@/lib/arcjet";
+import arcjet, { fixedWindow } from "@/lib/arcjet";
 import { request } from "@arcjet/next";
 
-const aj = arcjet
-  .withRule(
-    detectBot({
-      mode: "LIVE",
-      allow: [],
-    })
-  )
-  .withRule(
-    fixedWindow({
-      mode: "LIVE",
-      window: "1m",
-      max: 2,
-    })
-  );
+const aj = arcjet.withRule(
+  fixedWindow({
+    mode: "LIVE",
+    window: "1m",
+    max: 2,
+  })
+);
 
 export const updateCourse = async (
   courseId: string,

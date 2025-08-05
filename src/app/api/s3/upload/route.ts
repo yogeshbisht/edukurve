@@ -5,30 +5,23 @@ import { NextRequest, NextResponse } from "next/server";
 import { env } from "@/lib/env";
 import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
-import arcjet, { detectBot, fixedWindow } from "@/lib/arcjet";
+import arcjet, { fixedWindow } from "@/lib/arcjet";
 import { requireAdmin } from "@/data/admin/require-admin";
 
-export const fileUploadSchema = z.object({
+const fileUploadSchema = z.object({
   fileName: z.string().min(1, { message: "File name is required" }),
   contentType: z.string().min(1, { message: "Content type is required" }),
   size: z.number().min(1, { message: "Size is required" }),
   isImage: z.boolean().optional(),
 });
 
-const aj = arcjet
-  .withRule(
-    detectBot({
-      mode: "LIVE",
-      allow: [],
-    })
-  )
-  .withRule(
-    fixedWindow({
-      mode: "LIVE",
-      window: "1m",
-      max: 2,
-    })
-  );
+const aj = arcjet.withRule(
+  fixedWindow({
+    mode: "LIVE",
+    window: "1m",
+    max: 2,
+  })
+);
 
 export async function POST(request: NextRequest) {
   const session = await requireAdmin();
