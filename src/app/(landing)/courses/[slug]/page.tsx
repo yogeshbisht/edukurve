@@ -6,7 +6,6 @@ import {
   IconBook,
   IconCategory,
   IconChartBar,
-  IconCheck,
   IconChevronDown,
   IconClock,
   IconPlayerPlay,
@@ -19,9 +18,11 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { Card, CardContent } from "@/components/ui/card";
-import { formatCurrency } from "@/lib/utils";
-import { CheckIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { cn, formatCurrency } from "@/lib/utils";
+import { CheckIcon, Link } from "lucide-react";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { checkIfCourseBought } from "@/data/user/user-is-enrolled";
+import EnrollmentButton from "./_components/enrollment-button";
 
 type Params = Promise<{ slug: string }>;
 
@@ -30,6 +31,8 @@ const CoursePage = async ({ params }: { params: Params }) => {
 
   const course = await getCourseBySlug(slug as string);
   const thumbnailUrl = useConstructUrl(course.fileKey);
+
+  const isEnrolled = await checkIfCourseBought(course.id);
 
   const getLessonCount = () => {
     const lessonCount =
@@ -247,8 +250,16 @@ const CoursePage = async ({ params }: { params: Params }) => {
                   ))}
                 </ul>
               </div>
-
-              <Button className="w-full">Enroll Now</Button>
+              {isEnrolled ? (
+                <Link
+                  href={`/dashboard/courses/${course.id}`}
+                  className={cn(buttonVariants, "w-full")}
+                >
+                  View Course
+                </Link>
+              ) : (
+                <EnrollmentButton courseId={course.id} />
+              )}
               <p className="mt-3 text-center text-xs text-muted-foreground">
                 30-Day Money Back Guarantee
               </p>

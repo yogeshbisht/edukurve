@@ -30,6 +30,8 @@ const aj = arcjet.withRule(
   })
 );
 
+const unused = "text";
+
 export const updateCourse = async (
   courseId: string,
   formData: CourseSchemaType

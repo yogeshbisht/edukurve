@@ -75,7 +75,7 @@ const OTPForm = () => {
             </InputOTPGroup>
           </InputOTP>
           <p className="text-sm text-muted-foreground">
-            Didn't receive the code?{" "}
+            Didn&apos;t receive the code?{" "}
             <Link href="/verify-email" className="text-primary">
               Resend
             </Link>

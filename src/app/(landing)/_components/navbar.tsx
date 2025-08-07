@@ -17,9 +17,9 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           <BrandLogo />
           <div className="flex items-center gap-4">
+            <ThemeToggle />
             {session ? (
               <>
-                <ThemeToggle />
                 <UserButton user={session.user} />
               </>
             ) : (
