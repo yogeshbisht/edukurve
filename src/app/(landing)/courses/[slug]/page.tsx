@@ -18,9 +18,10 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { Card, CardContent } from "@/components/ui/card";
-import { cn, formatCurrency } from "@/lib/utils";
-import { CheckIcon, Link } from "lucide-react";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { formatCurrency } from "@/lib/utils";
+import { CheckIcon } from "lucide-react";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
 import { checkIfCourseBought } from "@/data/user/user-is-enrolled";
 import EnrollmentButton from "./_components/enrollment-button";
 
@@ -253,9 +254,11 @@ const CoursePage = async ({ params }: { params: Params }) => {
               {isEnrolled ? (
                 <Link
                   href={`/dashboard/courses/${course.id}`}
-                  className={cn(buttonVariants, "w-full")}
+                  className={buttonVariants({
+                    className: "w-full",
+                  })}
                 >
-                  View Course
+                  Watch Course
                 </Link>
               ) : (
                 <EnrollmentButton courseId={course.id} />
