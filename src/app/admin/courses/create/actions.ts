@@ -9,6 +9,7 @@ import { ApiResponse } from "@/lib/types";
 import { requireAdmin } from "@/data/admin/require-admin";
 import arcjet, { fixedWindow } from "@/lib/arcjet";
 import { request } from "@arcjet/next";
+import { stripe } from "@/lib/stripe";
 
 const aj = arcjet.withRule(
   fixedWindow({
@@ -54,12 +55,22 @@ export async function createCourse(
 
     const { level, status, ...rest } = validatedFields.data;
 
+    const stripeProduct = await stripe.products.create({
+      name: validatedFields.data.title,
+      description: validatedFields.data.smallDescription,
+      default_price_data: {
+        currency: "usd",
+        unit_amount: validatedFields.data.price * 100,
+      },
+    });
+
     const course = await prisma.course.create({
       data: {
         ...rest,
         authorId: session.user.id,
         level: level as CourseLevel,
         status: status as CourseStatus,
+        stripePriceId: stripeProduct.default_price as string,
       },
     });
 
