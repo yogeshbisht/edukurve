@@ -5,6 +5,7 @@ import { requireAdmin } from "@/data/admin/require-admin";
 import { revalidatePath } from "next/cache";
 import arcjet, { fixedWindow } from "@/lib/arcjet";
 import { request } from "@arcjet/next";
+import { returnErrorMessage } from "@/lib/utils";
 
 const aj = arcjet.withRule(
   fixedWindow({
@@ -60,7 +61,7 @@ export const deleteCourse = async (courseId: string) => {
   } catch (error) {
     return {
       status: "error",
-      message: "Failed to delete course",
+      message: returnErrorMessage(error),
     };
   }
 };

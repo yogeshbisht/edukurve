@@ -1,6 +1,6 @@
 "use client";
 
-import { IconDotsVertical, IconLogin, IconUserPlus } from "@tabler/icons-react";
+import { IconDotsVertical, IconLogin } from "@tabler/icons-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,9 +13,9 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { authClient } from "@/lib/auth-client";
-import UserAvatar from "./user-avatar";
+import UserAvatar from "@/components/user-avatar";
 import Link from "next/link";
-import UserMenu from "./navigation/user-menu";
+import UserMenu from "@/components/navigation/user-menu";
 
 export function NavUser() {
   const { isMobile } = useSidebar();

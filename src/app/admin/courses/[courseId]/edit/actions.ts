@@ -21,6 +21,7 @@ import {
 import { revalidatePath } from "next/cache";
 import arcjet, { fixedWindow } from "@/lib/arcjet";
 import { request } from "@arcjet/next";
+import { returnErrorMessage } from "@/lib/utils";
 
 const aj = arcjet.withRule(
   fixedWindow({
@@ -29,8 +30,6 @@ const aj = arcjet.withRule(
     max: 2,
   })
 );
-
-const unused = "text";
 
 export const updateCourse = async (
   courseId: string,
@@ -88,7 +87,7 @@ export const updateCourse = async (
   } catch (error) {
     return {
       status: "error",
-      message: "Failed to update course",
+      message: returnErrorMessage(error),
     };
   }
 };
@@ -126,7 +125,7 @@ export const reorderLessons = async (
   } catch (error) {
     return {
       status: "error",
-      message: "Failed to reorder lessons",
+      message: returnErrorMessage(error),
     };
   }
 };
@@ -163,7 +162,7 @@ export const reorderChapters = async (
   } catch (error) {
     return {
       status: "error",
-      message: "Failed to reorder chapters",
+      message: returnErrorMessage(error),
     };
   }
 };
@@ -208,7 +207,7 @@ export const createChapter = async (
   } catch (error) {
     return {
       status: "error",
-      message: "Failed to create chapter",
+      message: returnErrorMessage(error),
     };
   }
 };
@@ -256,7 +255,7 @@ export const createLesson = async (
   } catch (error) {
     return {
       status: "error",
-      message: "Failed to create lesson",
+      message: returnErrorMessage(error),
     };
   }
 };
@@ -324,7 +323,7 @@ export const deleteChapter = async (
   } catch (error) {
     return {
       status: "error",
-      message: "Failed to delete chapter",
+      message: returnErrorMessage(error),
     };
   }
 };
@@ -389,7 +388,7 @@ export const deleteLesson = async (
   } catch (error) {
     return {
       status: "error",
-      message: "Failed to delete lesson",
+      message: returnErrorMessage(error),
     };
   }
 };

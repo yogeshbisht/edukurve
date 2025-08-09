@@ -8,6 +8,7 @@ import { env } from "@/lib/env";
 import { redirect } from "next/navigation";
 import arcjet, { fixedWindow } from "@/lib/arcjet";
 import { request } from "@arcjet/next";
+import { returnErrorMessage } from "@/lib/utils";
 
 const aj = arcjet.withRule(
   fixedWindow({
@@ -159,7 +160,7 @@ export const enrollInCourse = async (
   } catch (error) {
     return {
       status: "error",
-      message: "Something went wrong",
+      message: returnErrorMessage(error),
     };
   }
 

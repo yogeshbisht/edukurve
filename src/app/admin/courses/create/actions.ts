@@ -10,6 +10,7 @@ import { requireAdmin } from "@/data/admin/require-admin";
 import arcjet, { fixedWindow } from "@/lib/arcjet";
 import { request } from "@arcjet/next";
 import { stripe } from "@/lib/stripe";
+import { returnErrorMessage } from "@/lib/utils";
 
 const aj = arcjet.withRule(
   fixedWindow({
@@ -84,7 +85,7 @@ export async function createCourse(
   } catch (error) {
     return {
       status: "error",
-      message: "Failed to create course",
+      message: returnErrorMessage(error),
     };
   }
 }

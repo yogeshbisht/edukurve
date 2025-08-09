@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { getCourseBySlug } from "@/data/course/get-course";
-import { useConstructUrl } from "@/hooks/use-construct";
 import { Badge } from "@/components/ui/badge";
 import {
   IconBook,
@@ -24,6 +23,7 @@ import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { checkIfCourseBought } from "@/data/user/user-is-enrolled";
 import EnrollmentButton from "./_components/enrollment-button";
+import { env } from "@/lib/env";
 
 type Params = Promise<{ slug: string }>;
 
@@ -31,7 +31,6 @@ const CoursePage = async ({ params }: { params: Params }) => {
   const { slug } = await params;
 
   const course = await getCourseBySlug(slug as string);
-  const thumbnailUrl = useConstructUrl(course.fileKey);
 
   const isEnrolled = await checkIfCourseBought(course.id);
 
@@ -84,7 +83,7 @@ const CoursePage = async ({ params }: { params: Params }) => {
       <div className="order-1 lg:col-span-2">
         <div className="relative aspect-video w-full overflow-hidden">
           <Image
-            src={thumbnailUrl}
+            src={`${env.NEXT_PUBLIC_S3_MEDIA_URL}/${course.fileKey}`}
             alt={course.title}
             fill
             className="object-cover"

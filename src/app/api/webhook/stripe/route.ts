@@ -3,6 +3,7 @@ import { stripe } from "@/lib/stripe";
 import { env } from "@/lib/env";
 import Stripe from "stripe";
 import { prisma } from "@/lib/prisma";
+import { returnErrorMessage } from "@/lib/utils";
 
 export const POST = async (req: Request) => {
   const body = await req.text();
@@ -20,10 +21,11 @@ export const POST = async (req: Request) => {
       env.STRIPE_WEBHOOK_SECRET as string
     );
   } catch (err) {
-    return new Response("Webhook verification failed", { status: 400 });
+    return new Response(
+      `${returnErrorMessage(err, "Webhook verification failed")}`,
+      { status: 400 }
+    );
   }
-
-  const session = event.data.object as Stripe.Checkout.Session;
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;

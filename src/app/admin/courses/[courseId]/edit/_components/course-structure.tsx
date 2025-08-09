@@ -32,8 +32,6 @@ import {
   ChevronRightIcon,
   FileTextIcon,
   GripVerticalIcon,
-  Trash2Icon,
-  TrashIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";

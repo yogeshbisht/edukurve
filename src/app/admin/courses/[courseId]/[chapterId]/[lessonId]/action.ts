@@ -4,6 +4,7 @@ import { requireAdmin } from "@/data/admin/require-admin";
 import { Lesson } from "@/generated/prisma";
 import { ApiResponse } from "@/lib/types";
 import { lessonSchema, LessonSchemaType } from "@/lib/validations";
+import { returnErrorMessage } from "@/lib/utils";
 
 export const updateLesson = async (
   lessonId: string,
@@ -40,7 +41,7 @@ export const updateLesson = async (
   } catch (error) {
     return {
       status: "error",
-      message: "Failed to update lesson",
+      message: returnErrorMessage(error),
     };
   }
 };

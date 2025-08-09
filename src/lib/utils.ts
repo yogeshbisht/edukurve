@@ -11,3 +11,10 @@ export const formatCurrency = (amount: number) => {
     currency: "USD",
   }).format(amount);
 };
+
+export const returnErrorMessage = (
+  error: unknown,
+  defaultMessage = "Something went wrong"
+) => {
+  return error instanceof Error ? error.message : defaultMessage;
+};

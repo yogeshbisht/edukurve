@@ -8,6 +8,7 @@ import { TextAlign } from "@tiptap/extension-text-align";
 import { AlertCircleIcon } from "lucide-react";
 import Link from "next/link";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const TextEditor = ({ field }: { field: any }) => {
   const editor = useEditor({
     extensions: [

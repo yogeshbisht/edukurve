@@ -1,6 +1,6 @@
-import { ChartAreaInteractive } from "@/components/chart-area-interactive";
+import { ChartAreaInteractive } from "@/components/sidebar/chart-area-interactive";
 import EmptyState from "@/components/empty-state";
-import SectionCards from "@/components/section-cards";
+import SectionCards from "@/components/sidebar/section-cards";
 import { adminGetEnrollmentStats } from "@/data/admin/admin-get-enrollment-stats";
 import { adminGetRecentCourses } from "@/data/admin/admin-get-recent-courses";
 import Link from "next/link";

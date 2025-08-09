@@ -3,7 +3,7 @@
 import { useDropzone } from "react-dropzone";
 import { useCallback, useEffect } from "react";
 import { Card, CardContent } from "../ui/card";
-import { cn } from "@/lib/utils";
+import { cn, returnErrorMessage } from "@/lib/utils";
 import {
   RenderEmptyState,
   RenderErrorState,
@@ -127,7 +127,7 @@ const Uploader = ({ value, onChange, fileTypeAccepted }: UploaderProps) => {
           xhr.send(file);
         });
       } catch (error) {
-        toast.error("Failed to upload file");
+        toast.error(returnErrorMessage(error, "Failed to upload file"));
         setFileState((prev) => ({
           ...prev,
           uploading: false,
@@ -217,7 +217,7 @@ const Uploader = ({ value, onChange, fileTypeAccepted }: UploaderProps) => {
 
       toast.success("File deleted successfully");
     } catch (error) {
-      toast.error("Failed to delete file");
+      toast.error(returnErrorMessage(error, "Failed to delete file"));
 
       setFileState((prev) => ({
         ...prev,
