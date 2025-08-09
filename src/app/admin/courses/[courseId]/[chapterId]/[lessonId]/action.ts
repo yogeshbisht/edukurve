@@ -38,7 +38,6 @@ export const updateLesson = async (
       message: "Lesson updated successfully",
     };
   } catch (error) {
-    console.log(error);
     return {
       status: "error",
       message: "Failed to update lesson",

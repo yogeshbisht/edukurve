@@ -52,7 +52,6 @@ const NewLessonModal = ({ courseId, chapterId }: NewLessonModalProps) => {
   };
 
   const onSubmit = (values: LessonSchemaType) => {
-    console.log(values);
     startTransition(async () => {
       const { data: result, error } = await tryCatch(createLesson(values));
       if (error) {
