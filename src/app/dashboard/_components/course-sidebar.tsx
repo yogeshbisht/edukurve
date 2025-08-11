@@ -1,3 +1,5 @@
+"use client";
+
 import { ChevronDownIcon, PlayIcon } from "lucide-react";
 import { CourseSidebarDataType } from "@/data/course/get-course-sidebar-data";
 import { Progress } from "@/components/ui/progress";
@@ -7,12 +9,17 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { Button } from "@/components/ui/button";
+import LessonItem from "./lesson-item";
+import { usePathname } from "next/navigation";
 
 interface CourseSidebarProps {
   course: CourseSidebarDataType;
 }
 
 const CourseSidebar = ({ course }: CourseSidebarProps) => {
+  const pathname = usePathname();
+  const currentLessonId = pathname.split("/").pop();
+
   return (
     <div className="flex flex-col h-full">
       <div className="pb-4 pr-4 border-b border-border">
@@ -62,7 +69,12 @@ const CourseSidebar = ({ course }: CourseSidebarProps) => {
             </CollapsibleTrigger>
             <CollapsibleContent className="mt-3 pl-6 border-l-2 space-y-3">
               {chapter.lessons.map((lesson) => (
-                <p key={lesson.id}>{lesson.title}</p>
+                <LessonItem
+                  key={lesson.id}
+                  lesson={lesson}
+                  slug={course.slug}
+                  isActive={currentLessonId === lesson.id}
+                />
               ))}
             </CollapsibleContent>
           </Collapsible>
