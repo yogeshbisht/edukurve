@@ -1,15 +1,22 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent } from "@/components/ui/card";
-import { PublicCourseType } from "@/data/course/get-all-courses";
 import { useConstructUrl } from "@/hooks/use-construct";
 import Image from "next/image";
 import Link from "next/link";
-import { SchoolIcon, TimerIcon } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
+import { EnrolledCourseType } from "@/data/user/get-enrolled-courses";
+import { useCourseProgress } from "@/hooks/use-course-progress";
+import { Progress } from "@/components/ui/progress";
 
-const PublicCourseCard = ({ course }: { course: PublicCourseType }) => {
+const CourseProgressCard = ({ data }: { data: EnrolledCourseType }) => {
+  const { course } = data;
   const thumbnailUrl = useConstructUrl(course.fileKey);
+  const { completedLessons, totalLessons, progress } = useCourseProgress(
+    course as any
+  );
 
   return (
     <Card className="group relative py-0 gap-0">
@@ -23,7 +30,7 @@ const PublicCourseCard = ({ course }: { course: PublicCourseType }) => {
       />
       <CardContent className="p-4">
         <Link
-          href={`/courses/${course.slug}`}
+          href={`/dashboard/${course.slug}`}
           className="group-hover:text-primary font-medium text-lg line-clamp-2"
         >
           {course.title}
@@ -31,22 +38,18 @@ const PublicCourseCard = ({ course }: { course: PublicCourseType }) => {
         <p className="text-sm text-muted-foreground line-clamp-2 mt-2 landing-tight">
           {course.smallDescription}
         </p>
-        <div className="mt-4 flex items-center gap-x-5">
-          <div className="flex items-center gap-x-2">
-            <TimerIcon className="size-6 p-1 rounded-md text-primary bg-primary/10" />
-            <span className="text-sm text-muted-foreground">
-              {course.duration}h
-            </span>
+        <div className="space-y-4 mt-4">
+          <div className="flex justify-between mb-1 text-sm">
+            <p className="mb-0.5">Progress:</p>
+            <p className="font-medium">{progress}%</p>
           </div>
-          <div className="flex items-center gap-x-2">
-            <SchoolIcon className="size-6 p-1 rounded-md text-primary bg-primary/10" />
-            <span className="text-sm text-muted-foreground">
-              {course.category}
-            </span>
-          </div>
+          <Progress value={progress} className="h-1.5" />
+          <p className="text-xs text-muted-foreground">
+            {completedLessons} of {totalLessons} lessons completed
+          </p>
         </div>
         <Link
-          href={`/courses/${course.slug}`}
+          href={`/dashboard/${course.slug}`}
           className={buttonVariants({
             className: "mt-4 w-full",
           })}
@@ -92,4 +95,4 @@ export const PublicCourseCardSkeleton = () => {
   );
 };
 
-export default PublicCourseCard;
+export default CourseProgressCard;
