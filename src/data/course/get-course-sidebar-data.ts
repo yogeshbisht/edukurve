@@ -34,6 +34,7 @@ export const getCourseSidebarData = async (slug: string) => {
               title: true,
               position: true,
               description: true,
+              lessonProgress: true,
             },
           },
         },

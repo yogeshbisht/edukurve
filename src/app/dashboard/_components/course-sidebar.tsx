@@ -11,14 +11,14 @@ import {
 import { Button } from "@/components/ui/button";
 import LessonItem from "./lesson-item";
 import { usePathname } from "next/navigation";
+import { useCourseProgress } from "@/hooks/use-course-progress";
 
-interface CourseSidebarProps {
-  course: CourseSidebarDataType;
-}
-
-const CourseSidebar = ({ course }: CourseSidebarProps) => {
+const CourseSidebar = ({ course }: { course: CourseSidebarDataType }) => {
   const pathname = usePathname();
   const currentLessonId = pathname.split("/").pop();
+
+  const { completedLessons, totalLessons, progress } =
+    useCourseProgress(course);
 
   return (
     <div className="flex flex-col h-full">
@@ -40,10 +40,12 @@ const CourseSidebar = ({ course }: CourseSidebarProps) => {
         <div className="space-y-2">
           <div className="flex justify-between text-xs">
             <span className="text-muted-foreground">Progress</span>
-            <span className="font-medium">4/10 lessons</span>
+            <span className="font-medium">
+              {completedLessons}/{totalLessons} lessons
+            </span>
           </div>
-          <Progress value={50} className="h-1.5" />
-          <p className="text-xs text-muted-foreground">50% completed</p>
+          <Progress value={progress} className="h-1.5" />
+          <p className="text-xs text-muted-foreground">{progress}% completed</p>
         </div>
       </div>
       <div className="py-4 pr-4 space-y-3">
@@ -74,6 +76,11 @@ const CourseSidebar = ({ course }: CourseSidebarProps) => {
                   lesson={lesson}
                   slug={course.slug}
                   isActive={currentLessonId === lesson.id}
+                  completed={
+                    lesson.lessonProgress.find(
+                      (progress) => progress.lessonId === lesson.id
+                    )?.completed ?? false
+                  }
                 />
               ))}
             </CollapsibleContent>

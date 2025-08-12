@@ -10,7 +10,7 @@ import {
   IconPlayerPlay,
 } from "@tabler/icons-react";
 import { Separator } from "@/components/ui/separator";
-import RenderDescription from "@/components/rick-text-editor/render-description";
+import RenderDescription from "@/components/rich-text-editor/render-description";
 import {
   Collapsible,
   CollapsibleContent,

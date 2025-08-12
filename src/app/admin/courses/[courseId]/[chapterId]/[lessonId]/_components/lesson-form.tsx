@@ -1,6 +1,6 @@
 "use client";
 
-import TextEditor from "@/components/rick-text-editor/text-editor";
+import TextEditor from "@/components/rich-text-editor/text-editor";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,

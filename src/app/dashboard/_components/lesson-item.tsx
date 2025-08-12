@@ -2,7 +2,6 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { CheckIcon, PlayIcon } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 
 interface LessonItemProps {
   lesson: {
@@ -13,11 +12,10 @@ interface LessonItemProps {
   };
   slug: string;
   isActive?: boolean;
+  completed: boolean;
 }
 
-const LessonItem = ({ lesson, slug, isActive }: LessonItemProps) => {
-  const completed = false;
-
+const LessonItem = ({ lesson, slug, isActive, completed }: LessonItemProps) => {
   return (
     <Link
       href={`/dashboard/${slug}/${lesson.id}`}
