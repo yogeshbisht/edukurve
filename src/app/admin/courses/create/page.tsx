@@ -44,7 +44,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import TextEditor from "@/components/rick-text-editor/text-editor";
+import TextEditor from "@/components/rich-text-editor/text-editor";
 import FileUploader from "@/components/file-uploader/uploader";
 import { tryCatch } from "@/hooks/try-catch";
 import { createCourse } from "./actions";

@@ -33,7 +33,7 @@ import React, { useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { tryCatch } from "@/hooks/try-catch";
 import { toast } from "sonner";
-import TextEditor from "@/components/rick-text-editor/text-editor";
+import TextEditor from "@/components/rich-text-editor/text-editor";
 import { ApiResponse } from "@/lib/types";
 import { SparkleIcon, Loader2Icon, SaveIcon } from "lucide-react";
 import slugify from "slugify";
