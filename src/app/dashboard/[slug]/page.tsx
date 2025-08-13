@@ -22,7 +22,7 @@ const CourseSlugPage = async ({ params }: CourseSlugPageProps) => {
     <div className="flex items-center justify-center h-full text-center">
       <h2 className="text-2xl font-bold mb-2">No lessons found</h2>
       <p className="text-muted-foreground">
-        This course doesn't have any lessons yet. Please check back later.
+        This course doesn&apos;t have any lessons yet. Please check back later.
       </p>
     </div>
   );

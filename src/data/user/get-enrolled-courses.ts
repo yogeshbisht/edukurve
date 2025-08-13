@@ -20,9 +20,13 @@ export const getEnrolledCourses = async () => {
           level: true,
           slug: true,
           smallDescription: true,
+          duration: true,
+          category: true,
           chapters: {
             select: {
               id: true,
+              title: true,
+              position: true,
               lessons: {
                 select: {
                   id: true,

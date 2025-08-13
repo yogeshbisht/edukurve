@@ -1,6 +1,5 @@
 "use client";
 
-import RenderDescription from "@/components/rich-text-editor/render-description";
 import { Button } from "@/components/ui/button";
 import { LessonContent } from "@/data/course/get-lesson-content";
 import { useConstructUrl } from "@/hooks/use-construct";
@@ -70,7 +69,7 @@ const CourseContent = ({ lesson }: { lesson: LessonContent }) => {
     });
   };
   return (
-    <div className="flex flex-col h-full bg-background pl-6">
+    <>
       <VideoPlayer
         thumbnailKey={lesson.thumbnailKey ?? ""}
         videoKey={lesson.videoKey ?? ""}
@@ -92,17 +91,7 @@ const CourseContent = ({ lesson }: { lesson: LessonContent }) => {
           </Button>
         )}
       </div>
-
-      <div className="space-y-3 pt-3">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
-          {lesson.title}
-        </h1>
-        {lesson.description}
-        {/* {lesson.description && (
-          <RenderDescription json={JSON.parse(lesson.description)} />
-        )} */}
-      </div>
-    </div>
+    </>
   );
 };
 

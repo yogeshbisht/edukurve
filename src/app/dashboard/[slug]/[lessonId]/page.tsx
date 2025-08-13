@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { getLessonContent } from "@/data/course/get-lesson-content";
 import CourseContent from "./_components/course-content";
 import { Skeleton } from "@/components/ui/skeleton";
+import RenderDescription from "@/components/rich-text-editor/render-description";
 
 type Params = Promise<{
   lessonId: string;
@@ -20,7 +21,20 @@ const LessonContentPage = async ({ params }: { params: Params }) => {
 const LessonContentLoader = async ({ lessonId }: { lessonId: string }) => {
   const lesson = await getLessonContent(lessonId);
 
-  return <CourseContent lesson={lesson} />;
+  return (
+    <div className="flex flex-col h-full bg-background pl-6">
+      <CourseContent lesson={lesson} />
+
+      <div className="space-y-3 pt-3">
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+          {lesson.title}
+        </h1>
+        {lesson.description && (
+          <RenderDescription json={JSON.parse(lesson.description)} />
+        )}
+      </div>
+    </div>
+  );
 };
 
 // TODO: improve this skeleton

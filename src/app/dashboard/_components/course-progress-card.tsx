@@ -14,9 +14,8 @@ import { Progress } from "@/components/ui/progress";
 const CourseProgressCard = ({ data }: { data: EnrolledCourseType }) => {
   const { course } = data;
   const thumbnailUrl = useConstructUrl(course.fileKey);
-  const { completedLessons, totalLessons, progress } = useCourseProgress(
-    course as any
-  );
+  const { completedLessons, totalLessons, progress } =
+    useCourseProgress(course);
 
   return (
     <Card className="group relative py-0 gap-0">
