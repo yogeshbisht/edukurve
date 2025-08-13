@@ -30,12 +30,6 @@ const Navbar = () => {
                 >
                   Login
                 </Link>
-                <Link
-                  href="/signup"
-                  className={buttonVariants({ variant: "default" })}
-                >
-                  Sign up
-                </Link>
               </>
             )}
           </div>
