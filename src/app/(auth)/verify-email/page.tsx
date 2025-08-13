@@ -3,7 +3,7 @@ import OTPForm from "./_components/otp-form";
 
 const VerifyEmailPage = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense>
       <OTPForm />
     </Suspense>
   );

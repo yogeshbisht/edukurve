@@ -4,6 +4,8 @@ import PublicCourseCard, {
 } from "../_components/public-course-card";
 import { Suspense } from "react";
 
+export const dynamic = "force-dynamic";
+
 const CoursesPage = () => {
   return (
     <div className="mt-10">
