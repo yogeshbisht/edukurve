@@ -108,17 +108,35 @@ const AdminCourseCard = ({ course }: AdminCourseCardProps) => {
   );
 };
 
-// TODO: Improve this skeleton later
 export const AdminCourseCardSkeleton = () => {
   return (
     <Card className="group relative py-0 gap-0">
-      <Skeleton className="w-full h-48 rounded-t-lg aspect-video object-cover" />
-      <CardContent className="p-6">
-        <Skeleton className="w-full h-4" />
-        <Skeleton className="w-full h-4 mt-2" />
-        <Skeleton className="w-full h-4 mt-2" />
-        <Skeleton className="w-full h-4 mt-2" />
-        <Skeleton className="w-full h-4 mt-2" />
+      <div className="absolute top-2 right-2 z-10">
+        <Skeleton className="size-9" />
+      </div>
+      <div className="w-full relative h-fit">
+        <Skeleton className="w-full rounded-t-lg aspect-video" />
+      </div>
+
+      <CardContent className="px-6 py-4">
+        <div className="space-y-3 mt-2">
+          <Skeleton className="h-6 w-full" />
+          <Skeleton className="h-4 w-3/4" />
+        </div>
+
+        <div className="mt-4 flex items-center gap-x-5">
+          {Array.from({ length: 2 }).map((_, index) => (
+            <div
+              key={`${index}-skeleton`}
+              className="flex items-center gap-x-2"
+            >
+              <Skeleton className="size-6 rounded-md" />
+              <Skeleton className="h-6 w-8" />
+            </div>
+          ))}
+        </div>
+
+        <Skeleton className="h-10 w-full mt-4 rounded-md" />
       </CardContent>
     </Card>
   );

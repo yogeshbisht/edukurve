@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { User } from "better-auth";
+import { User } from "@/lib/types";
 
 interface UserAvatarProps {
   user: User;

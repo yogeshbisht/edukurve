@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import UserAvatar from "@/components/user-avatar";
 import UserMenu from "@/components/navigation/user-menu";
-import { User } from "better-auth";
+import { User } from "@/lib/types";
 
 const UserButton = ({ user }: { user: User }) => {
   return (

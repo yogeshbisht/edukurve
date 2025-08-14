@@ -1,7 +1,7 @@
 const AUTH_FORM_PARAMS = {
   login: {
-    title: "Welcome Back!",
-    description: "Enter your email and password to login",
+    title: "Welcome!",
+    description: "Proceed with your preferred method to continue",
     link: "/signup",
     linkText: "Sign up",
     footer: {

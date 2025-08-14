@@ -1,6 +1,6 @@
 import { HomeIcon, Layers2Icon, LayoutDashboardIcon } from "lucide-react";
 
-const MENU_ITEMS = [
+const COMMON_MENU_ITEMS = [
   {
     label: "Home",
     href: "/",
@@ -11,6 +11,19 @@ const MENU_ITEMS = [
     href: "/courses",
     icon: Layers2Icon,
   },
+];
+
+const USER_MENU_ITEMS = [
+  ...COMMON_MENU_ITEMS,
+  {
+    label: "Dashboard",
+    href: "/dashboard",
+    icon: LayoutDashboardIcon,
+  },
+];
+
+const ADMIN_MENU_ITEMS = [
+  ...COMMON_MENU_ITEMS,
   {
     label: "Dashboard",
     href: "/admin",
@@ -18,4 +31,4 @@ const MENU_ITEMS = [
   },
 ];
 
-export { MENU_ITEMS };
+export { USER_MENU_ITEMS, ADMIN_MENU_ITEMS };

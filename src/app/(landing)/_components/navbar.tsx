@@ -28,7 +28,7 @@ const Navbar = () => {
                   href="/login"
                   className={buttonVariants({ variant: "outline" })}
                 >
-                  Login
+                  Get Started
                 </Link>
               </>
             )}

@@ -11,7 +11,7 @@ import EmptyState from "@/components/empty-state";
 const AdminCoursePage = async () => {
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between @container">
         <h1 className="text-2xl font-bold">Your Courses</h1>
 
         <Link
@@ -42,7 +42,7 @@ const RenderCourses = async () => {
           buttonLink="/admin/courses/create"
         />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 @3xl:grid-cols-2 @7xl:grid-cols-3 gap-6">
           {data.map((course) => (
             <AdminCourseCard key={course.id} course={course} />
           ))}
@@ -54,9 +54,9 @@ const RenderCourses = async () => {
 
 const AdminCourseCardSkeletonLayout = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 @3xl:grid-cols-2 @7xl:grid-cols-3 gap-6">
       {Array.from({ length: 6 }).map((_, index) => (
-        <AdminCourseCardSkeleton key={index} />
+        <AdminCourseCardSkeleton key={`${index}-skeleton`} />
       ))}
     </div>
   );

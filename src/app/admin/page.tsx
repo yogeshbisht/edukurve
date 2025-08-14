@@ -17,7 +17,7 @@ const AdminPage = async () => {
       <SectionCards />
       <ChartAreaInteractive enrollments={enrollmentData} />
 
-      <div className="space-y-4">
+      <div className="space-y-4 @container">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">
             <Link href="/admin/courses">View All Courses</Link>
@@ -47,7 +47,7 @@ const RenderRecentCourses = async () => {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 @3xl:grid-cols-2 @7xl:grid-cols-3 gap-6">
       {courses.map((course) => (
         <AdminCourseCard key={course.id} course={course} />
       ))}
@@ -57,7 +57,7 @@ const RenderRecentCourses = async () => {
 
 const RenderRecentCoursesSkeleton = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 @3xl:grid-cols-2 @7xl:grid-cols-3 gap-6">
       {Array.from({ length: 2 }).map((_, index) => (
         <AdminCourseCardSkeleton key={index} />
       ))}

@@ -5,15 +5,18 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from "../ui/dropdown-menu";
-import { MENU_ITEMS } from "@/constants";
+import { ADMIN_MENU_ITEMS, USER_MENU_ITEMS } from "@/constants";
 import Link from "next/link";
 import { IconLogout } from "@tabler/icons-react";
 import UserAvatar from "../user-avatar";
-import { User } from "better-auth";
+import { User } from "@/lib/types";
 import { useSignOut } from "@/hooks/use-signout";
 
 const UserMenu = ({ user }: { user: User }) => {
   const { signOut } = useSignOut();
+
+  const isAdmin = user.role === "admin";
+  const menuItems = isAdmin ? ADMIN_MENU_ITEMS : USER_MENU_ITEMS;
 
   return (
     <>
@@ -24,7 +27,7 @@ const UserMenu = ({ user }: { user: User }) => {
       </DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
-        {MENU_ITEMS.map((item) => (
+        {menuItems.map((item) => (
           <DropdownMenuItem key={item.label} asChild>
             <Link href={item.href}>
               <item.icon />
